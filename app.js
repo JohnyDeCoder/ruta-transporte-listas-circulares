@@ -25,6 +25,25 @@ class Ruta {
             this.primero.ant = nuevo;
         }
     }
+
+    buscar(nombreBase) {
+        if (this.primero) {
+            if (this.primero.nombre === nombreBase) {
+                return this.primero;
+            }
+            else {
+                let temp = this.primero.sig;
+
+                while (temp != this.primero) {
+                    if (temp.nombre === nombreBase) {
+                        return temp;
+                    }
+                    temp = temp.sig;
+                }
+            }
+        }
+        return null;
+    }
 }
 
 let miRuta = new Ruta();

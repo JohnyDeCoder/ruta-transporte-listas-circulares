@@ -68,6 +68,28 @@ class Ruta {
             return false;
         }
     }
+
+    imprimir() {
+        if (this.primero) {
+            if (this.primero.sig === this.primero) {
+                return "1) Nombre de la base: " + this.primero.nombre + " | Minutos: " + this.primero.minutos;
+            }
+            else {
+                let lista = "", temp = this.primero, i = 1;
+
+                while (temp) {
+                    lista += i + ") Nombre de la base: " + temp.nombre + " | Minutos: " + temp.minutos + "\n";
+                    i += 1;
+                    temp = temp.sig;
+
+                    if (temp === this.primero) {
+                        return lista;
+                    }
+                }
+            }
+        }
+        return "ERROR No existen bases en la ruta...";
+    }
 }
 
 let miRuta = new Ruta();

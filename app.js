@@ -44,6 +44,30 @@ class Ruta {
         }
         return null;
     }
+
+    eliminar(nombreBase) {
+        let base = this.buscar(nombreBase);
+
+        if (base === this.primero) {
+            if (this.primero.sig === this.primero) {
+                this.primero = null;
+            }
+            else {
+                this.primero.ant.sig = this.primero.sig;
+                this.primero.sig.ant = this.primero.ant;
+                this.primero = this.primero.sig;
+            }
+            return true;
+        }
+        else if (base) {
+            base.ant.sig = base.sig;
+            base.sig.ant = base.ant;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
 
 let miRuta = new Ruta();

@@ -90,6 +90,32 @@ class Ruta {
         }
         return "ERROR No existen bases en la ruta...";
     }
+
+    recorrido(baseInicio, horaInicio, minutoInicio, horaFin, minutoFin) {
+        let base = this.buscar(baseInicio);
+
+        if (base) {
+            let minutosInicio = ((horaInicio * 60) + minutoInicio), minutosFin = ((horaFin * 60) + minutoFin), minutosRecorridoRestante = 0, temp = base.sig, recorridoLista = "", i = 2;
+
+            recorridoLista += "1) El camión parte desde las " + horaInicio + ":" + minutoInicio + " hrs hasta las " + horaFin + ":" + minutoFin + " hrs desde la base " + base.nombre + " e iniciará su recorrido durante " + (minutosFin - minutosInicio) + " minutos.\n";
+            while (minutosInicio <= minutosFin) {
+                minutosInicio += temp.minutos;
+                if (minutosInicio >= minutosFin) {
+                    break;
+                }
+                else {
+                    recorridoLista += i + ") El camión llegó a la base " + temp.nombre + " con " + temp.minutos + " minutos de recorrido, van " + (minutosRecorridoRestante += temp.minutos) + " minutos de recorrido.\n";
+                    i += 1;
+                    temp = temp.sig;
+                }
+            }
+            recorridoLista += i + ") El camión finalizó su recorrido en la base " + temp.nombre + " con " + temp.minutos + " minutos de recorrido y se realizó " + (minutosRecorridoRestante += temp.minutos) + " minutos recorridos desde las " + horaInicio + ":" + minutoInicio + " hrs hasta las " + horaFin + ":" + minutoFin + " hrs.\n";
+            return recorridoLista;
+        }
+        else {
+            return "ERROR La base " + baseInicio + " no existe en la ruta..."
+        }
+    }
 }
 
 let miRuta = new Ruta();
